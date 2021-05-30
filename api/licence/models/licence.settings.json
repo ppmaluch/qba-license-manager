@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "licences",
+  "info": {
+    "name": "licence",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "licence_type": {
+      "type": "string",
+      "required": true
+    },
+    "expiry_date": {
+      "type": "date"
+    },
+    "expired": {
+      "type": "boolean"
+    },
+    "app_identifier": {
+      "type": "string",
+      "required": true
+    },
+    "app_version": {
+      "type": "string"
+    },
+    "allowed_devices": {
+      "type": "integer"
+    },
+    "devices": {
+      "type": "json"
+    }
+  }
+}
