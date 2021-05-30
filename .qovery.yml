@@ -1,0 +1,20 @@
+---
+application:
+  name: "qba-license-manager-backend"
+  project: "qba-license-manager"
+  organization: "QoveryCommunity"
+  storage:
+  - name: "storage"
+    size: "10"
+    type: "ssd"
+    mount_point: "/mnt/storage"
+databases:
+- type: "POSTGRESQL"
+  name: "qba-license"
+  version: "12"
+routers:
+- name: "main-qba-license-manager-backend"
+  routes:
+  - application_name: "qba-license-manager-backend"
+    paths:
+    - "/*"
