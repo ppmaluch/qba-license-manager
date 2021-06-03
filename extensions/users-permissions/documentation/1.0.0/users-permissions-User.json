@@ -1251,38 +1251,31 @@
               }
             }
           },
-          "licences": {
+          "apps": {
             "type": "array",
             "items": {
               "required": [
                 "id",
-                "licence_type",
-                "app_identifier"
+                "app_id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "licence_type": {
+                "app_id": {
                   "type": "string"
                 },
-                "expiry_date": {
-                  "type": "string"
-                },
-                "expired": {
+                "enabled": {
                   "type": "boolean"
                 },
-                "app_identifier": {
+                "user": {
                   "type": "string"
                 },
-                "app_version": {
-                  "type": "string"
-                },
-                "allowed_devices": {
-                  "type": "integer"
-                },
-                "devices": {
-                  "type": "object"
+                "licenses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -1334,7 +1327,7 @@
           "role": {
             "type": "string"
           },
-          "licences": {
+          "apps": {
             "type": "array",
             "items": {
               "type": "string"

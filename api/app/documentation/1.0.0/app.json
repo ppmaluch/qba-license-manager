@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/licences": {
+    "/apps": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Licence"
+                    "$ref": "#/components/schemas/App"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Licence"
+          "App"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Licence"
+                  "$ref": "#/components/schemas/App"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Licence"
+          "App"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewLicence"
+                "$ref": "#/components/schemas/NewApp"
               }
             }
           }
         }
       }
     },
-    "/licences/count": {
+    "/apps/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Licence"
+          "App"
         ],
         "parameters": []
       }
     },
-    "/licences/{id}": {
+    "/apps/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Licence"
+                  "$ref": "#/components/schemas/App"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Licence"
+          "App"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Licence"
+                  "$ref": "#/components/schemas/App"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Licence"
+          "App"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewLicence"
+                "$ref": "#/components/schemas/NewApp"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Licence"
+          "App"
         ],
         "parameters": [
           {
@@ -514,67 +514,138 @@
   },
   "components": {
     "schemas": {
-      "Licence": {
+      "App": {
         "required": [
           "id",
-          "licence_type",
-          "app_identifier"
+          "app_id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "licence_type": {
+          "app_id": {
             "type": "string"
           },
-          "expiry_date": {
-            "type": "string",
-            "format": "date"
+          "enabled": {
+            "type": "boolean",
+            "default": true
           },
-          "expired": {
-            "type": "boolean"
+          "user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "apps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           },
-          "app_identifier": {
-            "type": "string"
-          },
-          "app_version": {
-            "type": "string"
-          },
-          "allowed_devices": {
-            "type": "integer"
-          },
-          "devices": {
-            "type": "object"
+          "licenses": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "description",
+                "expiration_date",
+                "identifier"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "expiration_date": {
+                  "type": "string"
+                },
+                "expired": {
+                  "type": "boolean"
+                },
+                "identifier": {
+                  "type": "string"
+                },
+                "allowed_devices": {
+                  "type": "integer"
+                },
+                "devices": {
+                  "type": "object"
+                },
+                "app": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
-      "NewLicence": {
+      "NewApp": {
         "required": [
-          "licence_type",
-          "app_identifier"
+          "app_id"
         ],
         "properties": {
-          "licence_type": {
+          "app_id": {
             "type": "string"
           },
-          "expiry_date": {
-            "type": "string",
-            "format": "date"
+          "enabled": {
+            "type": "boolean",
+            "default": true
           },
-          "expired": {
-            "type": "boolean"
-          },
-          "app_identifier": {
+          "user": {
             "type": "string"
           },
-          "app_version": {
-            "type": "string"
-          },
-          "allowed_devices": {
-            "type": "integer"
-          },
-          "devices": {
-            "type": "object"
+          "licenses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"
@@ -588,7 +659,7 @@
   },
   "tags": [
     {
-      "name": "Licence"
+      "name": "App"
     }
   ]
 }

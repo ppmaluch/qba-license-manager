@@ -59,8 +59,9 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "licences": {
-      "collection": "licence"
+    "apps": {
+      "via": "user",
+      "collection": "app"
     }
   }
 }

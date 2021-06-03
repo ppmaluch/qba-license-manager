@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "apps",
+  "info": {
+    "name": "App",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "app_id": {
+      "type": "string",
+      "required": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    "user": {
+      "via": "apps",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "licenses": {
+      "collection": "license",
+      "via": "app"
+    }
+  }
+}

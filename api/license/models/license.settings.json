@@ -1,39 +1,40 @@
 {
   "kind": "collectionType",
-  "collectionName": "licences",
+  "collectionName": "licenses",
   "info": {
-    "name": "licence",
-    "description": ""
+    "name": "License"
   },
   "options": {
     "increments": true,
     "timestamps": true,
     "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
-    "licence_type": {
+    "description": {
       "type": "string",
       "required": true
     },
-    "expiry_date": {
-      "type": "date"
+    "expiration_date": {
+      "type": "string",
+      "required": true
     },
     "expired": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
-    "app_identifier": {
+    "identifier": {
       "type": "string",
       "required": true
-    },
-    "app_version": {
-      "type": "string"
     },
     "allowed_devices": {
       "type": "integer"
     },
     "devices": {
       "type": "json"
+    },
+    "app": {
+      "via": "licenses",
+      "model": "app"
     }
   }
 }
