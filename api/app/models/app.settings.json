@@ -28,6 +28,13 @@
     "licenses": {
       "collection": "license",
       "via": "app"
+    },
+    "app_version": {
+      "type": "string"
+    },
+    "url": {
+      "type": "uid",
+      "targetField": "app_id"
     }
   }
 }

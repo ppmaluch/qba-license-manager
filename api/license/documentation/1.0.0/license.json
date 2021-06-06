@@ -568,6 +568,12 @@
                   "type": "string"
                 }
               },
+              "app_version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "uid"
+              },
               "created_by": {
                 "type": "string"
               },
