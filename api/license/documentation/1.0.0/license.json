@@ -559,7 +559,7 @@
               "enabled": {
                 "type": "boolean"
               },
-              "user": {
+              "owner": {
                 "type": "string"
               },
               "licenses": {

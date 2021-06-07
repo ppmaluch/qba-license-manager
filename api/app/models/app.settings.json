@@ -20,10 +20,10 @@
       "default": true,
       "required": false
     },
-    "user": {
-      "via": "apps",
+    "owner": {
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "apps"
     },
     "licenses": {
       "collection": "license",

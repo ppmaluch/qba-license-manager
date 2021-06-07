@@ -60,7 +60,7 @@
       "configurable": false
     },
     "apps": {
-      "via": "user",
+      "via": "owner",
       "collection": "app"
     }
   }

@@ -598,7 +598,7 @@
             "type": "boolean",
             "default": true
           },
-          "user": {
+          "owner": {
             "required": [
               "id",
               "username",
@@ -712,7 +712,7 @@
             "type": "boolean",
             "default": true
           },
-          "user": {
+          "owner": {
             "type": "string"
           },
           "licenses": {
