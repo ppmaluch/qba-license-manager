@@ -26,7 +26,30 @@ module.exports = {
         entity = await strapi.services.app.create(ctx.request.body);
 
         return sanitizeEntity(entity, {model: strapi.models.app});
-    }
+    },
 
+    /**
+     * Update a record only if you are the owner
+     *
+     * @returns {Object}
+     */
 
+    async update(ctx){
+        const {id} = ctx.params;
+
+        let entity;
+
+        const[app] = await strapi.services.app.find({
+            id : ctx.params.id,
+            'owner.id': ctx.state.user.id
+        });
+
+        if (!app){
+            return ctx.unauthorized(`No puedes actualizar un objeto que no haya sido creado por ti`);
+        }
+
+        entity = await strapi.services.app.update({id}, ctx.request.body);
+
+        return sanitizeEntity(entity,{model: strapi.models.app});
+    },
 };
