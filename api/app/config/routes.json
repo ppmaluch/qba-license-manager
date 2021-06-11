@@ -25,14 +25,6 @@
       }
     },
     {
-      "method": "GET",
-      "path": "/app/:url",
-      "handler": "app.findOneUrl",
-      "config": {
-        "policies": []
-      }
-    },
-    {
       "method": "POST",
       "path": "/apps",
       "handler": "app.create",
