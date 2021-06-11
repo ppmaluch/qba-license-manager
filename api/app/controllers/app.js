@@ -52,4 +52,23 @@ module.exports = {
 
         return sanitizeEntity(entity,{model: strapi.models.app});
     },
+
+    async delete(ctx){
+        const{id} = ctx.params;
+
+        let entity;
+
+        const[app] = await strapi.services.app.find({
+            id: ctx.params.id,
+            'owner.id': ctx.state.user.id
+        });
+
+        if (!app){
+            return ctx.unauthorized(`No puedes eliminar un objeto que no haya sido creado por ti`);
+        }
+
+        entity = await strapi.services.app.delete({id});
+
+        return sanitizeEntity(entity,{model: strapi.models.app});
+    }
 };
