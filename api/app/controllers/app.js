@@ -1,5 +1,4 @@
 'use strict';
-const { default: createStrapi } = require("strapi");
 const {sanitizeEntity} = require("strapi-utils");
 
 /**
@@ -8,11 +7,31 @@ const {sanitizeEntity} = require("strapi-utils");
  */
 
 module.exports = {
+
+
     // async findOneUrl(ctx){
     //     const {url} = ctx.params;
     //     const entity = await strapi.services.app.findOne({url});
     //     return sanitizeEntity(entity, {model: strapi.models.app});
     // },
+
+    /**
+     * Get all apps that belongs only to me
+     *
+     * @returns {Array}
+     */
+
+      async find(ctx) {
+        let entities;
+        if (ctx.query._q) {
+          entities = await strapi.services.app.search(ctx.query);
+        } else {
+          entities = await strapi.services.app.find(ctx.query);
+        }
+
+        return entities.map(entity => sanitizeEntity(entity,{model: strapi.models.app}))
+                       .filter(app => app.owner.id == ctx.state.user.id);
+      },
 
     /**
      * Create a record with authenticated user id by default
