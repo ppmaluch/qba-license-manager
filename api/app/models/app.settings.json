@@ -13,7 +13,8 @@
   "attributes": {
     "app_id": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "enabled": {
       "type": "boolean",
@@ -26,8 +27,8 @@
       "via": "apps"
     },
     "licenses": {
-      "collection": "license",
-      "via": "app"
+      "via": "app",
+      "collection": "license"
     },
     "app_version": {
       "type": "string"
