@@ -30,7 +30,22 @@ module.exports = {
       },
 
     /**
-     * Create a record if the user if owner of the licensed app
+     * Get a license only if it belongs to an app owned by me
+     *
+     * @returns {Array}
+     */
+
+    async findOne(ctx){
+        const {id} = ctx.params;
+        const entity = await strapi.services.license.findOne({id});
+        if (entity != null && (entity.app.owner != ctx.state.user.id)){
+            return ctx.unauthorized(`Solo se pueden solicitar licencias de apps creadas por ti`);
+        }
+        return sanitizeEntity(entity, {model: strapi.models.license})
+    },
+
+    /**
+     * Create a license only if the user owns the associated app
      *
      * @returns {Object}
      */
