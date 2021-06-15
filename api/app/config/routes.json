@@ -26,7 +26,7 @@
     },
     {
       "method": "PUT",
-      "path": "/apps/:id",
+      "path": "/apps/:url",
       "handler": "app.update",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/apps/:id",
+      "path": "/apps/:url",
       "handler": "app.delete",
       "config": {
         "policies": []
