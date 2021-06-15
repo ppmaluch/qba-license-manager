@@ -10,14 +10,6 @@
     },
     {
       "method": "GET",
-      "path": "/licenses/count",
-      "handler": "license.count",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
       "path": "/licenses/:id",
       "handler": "license.findOne",
       "config": {
