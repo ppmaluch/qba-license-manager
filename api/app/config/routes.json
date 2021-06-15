@@ -10,15 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/apps/count",
-      "handler": "app.count",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/apps/:id",
+      "path": "/apps/:url",
       "handler": "app.findOne",
       "config": {
         "policies": []
