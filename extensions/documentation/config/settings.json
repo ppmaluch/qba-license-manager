@@ -1,1012 +1,940 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "qba-license-manager",
-      "description": "",
-      "termsOfService": "https://github.com/ppmaluch/qba-license-manager#readme",
-      "contact": {
-        "name": "Ppmaluch",
-        "email": "ppmaluch@gmail.com"
-      },
-      "license": {
-        "name": "GPL 3.0",
-        "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
-      },
-      "x-generation-date": "06/15/2021 7:48:21 PM"
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "qba-license-manager",
+    "description": "",
+    "termsOfService": "https://github.com/ppmaluch/qba-license-manager#readme",
+    "contact": {
+      "name": "Ppmaluch",
+      "email": "ppmaluch@gmail.com"
     },
-    "x-strapi-config": {
-      "path": "/documentation",
-      "showGeneratedFiles": true,
-      "generateDefaultResponse": true,
-      "pluginsForWhichToGenerateDoc": [
-        "users-permissions"
-      ]
+    "license": {
+      "name": "GPL 3.0",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
     },
-    "servers": [
-      {
-        "url": "http://localhost:1337",
-        "description": "Development server"
+    "x-generation-date": "06/15/2021 7:48:21 PM"
+  },
+  "x-strapi-config": {
+    "path": "/documentation",
+    "showGeneratedFiles": true,
+    "generateDefaultResponse": true,
+    "pluginsForWhichToGenerateDoc": []
+  },
+  "servers": [
+    {
+      "url": "http://localhost:1337",
+      "description": "Development server"
+    },
+    {
+      "url": "https://qba-license-manager.herokuapp.com",
+      "description": "Heroku"
+    }
+  ],
+  "externalDocs": {
+    "description": "Strapi Docs",
+    "url": "https://strapi.io/documentation/"
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/apps": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/App"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["App"],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
       },
-      {
-        "url": "YOUR_STAGING_SERVER",
-        "description": "Heroku"
-      }
-    ],
-    "externalDocs": {
-      "description": "Strapi Docs",
-      "url": "https://strapi.io/documentation/"
-    },
-    "security": [
-      {
-        "bearerAuth": []
-      }
-    ],
-    "paths": {
-      "/apps": {
-        "get": {
-          "deprecated": false,
+      "post": {
+        "deprecated": false,
+        "description": "Create a new app, licenses object not required. url property is a slug automatically set by the backend, so no need to send",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["App"],
+        "requestBody": {
           "description": "",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/App"
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "App"
-          ],
-          "parameters": [
-            {
-              "name": "_limit",
-              "in": "query",
-              "required": false,
-              "description": "Maximum number of results possible",
+          "required": true,
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "integer"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_sort",
-              "in": "query",
-              "required": false,
-              "description": "Sort according to a specific field.",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_start",
-              "in": "query",
-              "required": false,
-              "description": "Skip a specific number of entries (especially useful for pagination)",
-              "schema": {
-                "type": "integer"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "=",
-              "in": "query",
-              "required": false,
-              "description": "Get entries that matches exactly your input",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_ne",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are not equals to something",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_lt",
-              "in": "query",
-              "required": false,
-              "description": "Get record that are lower than a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_lte",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are lower than or equal to a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_gt",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are greater than a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_gte",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are greater than  or equal a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_contains",
-              "in": "query",
-              "required": false,
-              "description": "Get records that contains a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_containss",
-              "in": "query",
-              "required": false,
-              "description": "Get records that contains (case sensitive) a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_in",
-              "in": "query",
-              "required": false,
-              "description": "Get records that matches any value in the array of values",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_nin",
-              "in": "query",
-              "required": false,
-              "description": "Get records that doesn't match any value in the array of values",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "deprecated": false
-            }
-          ]
-        },
-        "post": {
-          "deprecated": false,
-          "description": "Create a new app, licenses object not required. url property is a slug automatically set by the backend, so no need to send",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/App"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "App"
-          ],
-          "requestBody": {
-            "description": "",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NewApp"
-                }
+                "$ref": "#/components/schemas/NewApp"
               }
             }
           }
         }
-      },
-      "/apps/{url}": {
-        "get": {
-          "deprecated": false,
-          "description": "Gets an app passing the url (slug of the app_id property)",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/App"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "App"
-          ],
-          "parameters": [
-            {
-              "name": "url",
-              "in": "path",
-              "description": "example: com-mycompany-myapp",
-              "deprecated": false,
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "put": {
-          "deprecated": false,
-          "description": "Updates an app that belongs to the authenticated user",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/App"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "App"
-          ],
-          "requestBody": {
-            "description": "",
-            "required": true,
+      }
+    },
+    "/apps/{url}": {
+      "get": {
+        "deprecated": false,
+        "description": "Gets an app passing the url (slug of the app_id property)",
+        "responses": {
+          "200": {
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NewApp"
+                  "$ref": "#/components/schemas/App"
                 }
               }
             }
           },
-          "parameters": [
-            {
-              "name": "url",
-              "in": "path",
-              "description": "example: com-mycompany-myapp",
-              "deprecated": false,
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "delete": {
-          "deprecated": false,
-          "description": "Deletes an app that belongs to the authenticated user",
-          "responses": {
-            "200": {
-              "description": "deletes a single record based on the URL supplied",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "App"
-          ],
-          "parameters": [
-            {
-              "name": "url",
-              "in": "path",
-              "description": "",
-              "deprecated": false,
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
-        }
-      },
-      "/licenses": {
-        "get": {
-          "deprecated": false,
-          "description": "Gets all licenses that are registered to apps that belongs to the authenticated user",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/License"
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "License"
-          ],
-          "parameters": [
-            {
-              "name": "_limit",
-              "in": "query",
-              "required": false,
-              "description": "Maximum number of results possible",
-              "schema": {
-                "type": "integer"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_sort",
-              "in": "query",
-              "required": false,
-              "description": "Sort according to a specific field.",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_start",
-              "in": "query",
-              "required": false,
-              "description": "Skip a specific number of entries (especially useful for pagination)",
-              "schema": {
-                "type": "integer"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "=",
-              "in": "query",
-              "required": false,
-              "description": "Get entries that matches exactly your input",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_ne",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are not equals to something",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_lt",
-              "in": "query",
-              "required": false,
-              "description": "Get record that are lower than a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_lte",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are lower than or equal to a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_gt",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are greater than a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_gte",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are greater than  or equal a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_contains",
-              "in": "query",
-              "required": false,
-              "description": "Get records that contains a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_containss",
-              "in": "query",
-              "required": false,
-              "description": "Get records that contains (case sensitive) a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_in",
-              "in": "query",
-              "required": false,
-              "description": "Get records that matches any value in the array of values",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_nin",
-              "in": "query",
-              "required": false,
-              "description": "Get records that doesn't match any value in the array of values",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "deprecated": false
-            }
-          ]
-        },
-        "post": {
-          "deprecated": false,
-          "description": "Creates a new license",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/License"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "License"
-          ],
-          "requestBody": {
-            "description": "",
-            "required": true,
+          "403": {
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NewLicense"
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
           }
-        }
-      },
-      "/licenses/{id}": {
-        "get": {
-          "deprecated": false,
-          "description": "Gets a license only if it's registered to an app that belongs to the authenticated user",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/License"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "License"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "",
-              "deprecated": false,
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ]
         },
-        "put": {
-          "deprecated": false,
-          "description": "Updates a license only if it's registered to an app that belongs to the authenticated user",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/License"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
-          },
-          "summary": "",
-          "tags": [
-            "License"
-          ],
-          "requestBody": {
-            "description": "",
+        "summary": "",
+        "tags": ["App"],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "description": "example: com-mycompany-myapp",
+            "deprecated": false,
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Updates an app that belongs to the authenticated user",
+        "responses": {
+          "200": {
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NewLicense"
+                  "$ref": "#/components/schemas/App"
                 }
               }
             }
           },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "",
-              "deprecated": false,
-              "required": true,
-              "schema": {
-                "type": "string"
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
-          ]
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
         },
-        "delete": {
-          "deprecated": false,
-          "description": "Deletes a license only if it's registered to an app that belongs to the authenticated user",
-          "responses": {
-            "200": {
-              "description": "deletes a single record based on the ID supplied",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "integer",
-                    "format": "int64"
-                  }
+        "summary": "",
+        "tags": ["App"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewApp"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "description": "example: com-mycompany-myapp",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Deletes an app that belongs to the authenticated user",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the URL supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["App"],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/licenses": {
+      "get": {
+        "deprecated": false,
+        "description": "Gets all licenses that are registered to apps that belongs to the authenticated user",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/License"
                   }
                 }
               }
             }
           },
-          "summary": "",
-          "tags": [
-            "License"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "",
-              "deprecated": false,
-              "required": true,
-              "schema": {
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["License"],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "string"
               }
-            }
-          ]
-        }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
       },
-      "/auth/local": {
-        "post": {
-          "deprecated": false,
-          "description": "Login a user using the identifiers email and password",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "properties": {
-                      "foo": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
+      "post": {
+        "deprecated": false,
+        "description": "Creates a new license",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/License"
                 }
               }
             }
           },
-          "summary": "",
-          "tags": [
-            "User"
-          ],
-          "requestBody": {
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["License"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLicense"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/licenses/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Gets a license only if it's registered to an app that belongs to the authenticated user",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/License"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["License"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
             "description": "",
+            "deprecated": false,
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Updates a license only if it's registered to an app that belongs to the authenticated user",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/License"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["License"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLicense"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Deletes a license only if it's registered to an app that belongs to the authenticated user",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["License"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/auth/local": {
+      "post": {
+        "deprecated": false,
+        "description": "Login a user using the identifiers email and password",
+        "responses": {
+          "200": {
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1018,186 +946,265 @@
                 }
               }
             }
-          }
-        }
-      },
-      "/auth/local/register": {
-        "post": {
-          "deprecated": false,
-          "description": "Register a new user with the default role",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Users"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            }
           },
-          "summary": "",
-          "tags": [
-            "User"
-          ],
-          "requestBody": {
-            "description": "",
-            "required": true,
+          "403": {
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NewUsers"
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["User"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
         }
-      },
-      "/users/me": {
-        "get": {
-          "deprecated": false,
-          "description": "Retrieve the logged in user information",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Users"
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
+      }
+    },
+    "/auth/local/register": {
+      "post": {
+        "deprecated": false,
+        "description": "Register a new user with the default role",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
                 }
               }
             }
           },
-          "summary": "",
-          "tags": [
-            "User"
-          ],
-          "parameters": []
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["User"],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsers"
+              }
+            }
+          }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "App": {
-          "required": [
-            "id",
-            "app_id"
-          ],
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "app_id": {
-              "type": "string"
-            },
-            "enabled": {
-              "type": "boolean",
-              "default": true
-            },
-            "owner": {
+    "/users/me": {
+      "get": {
+        "deprecated": false,
+        "description": "Retrieve the logged in user information",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["User"],
+        "parameters": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "App": {
+        "required": ["id", "app_id"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "app_id": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "owner": {
+            "required": ["id", "username", "email"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "apps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "licenses": {
+            "type": "array",
+            "items": {
               "required": [
                 "id",
-                "username",
-                "email"
+                "description",
+                "expiration_date",
+                "identifier"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "username": {
+                "description": {
                   "type": "string"
                 },
-                "email": {
+                "expiration_date": {
                   "type": "string"
                 },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmationToken": {
-                  "type": "string"
-                },
-                "confirmed": {
+                "expired": {
                   "type": "boolean"
                 },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
+                "identifier": {
                   "type": "string"
                 },
-                "apps": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "allowed_devices": {
+                  "type": "integer"
+                },
+                "devices": {
+                  "type": "object"
+                },
+                "app": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -1206,128 +1213,208 @@
                   "type": "string"
                 }
               }
-            },
-            "licenses": {
-              "type": "array",
-              "items": {
-                "required": [
-                  "id",
-                  "description",
-                  "expiration_date",
-                  "identifier"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "expiration_date": {
-                    "type": "string"
-                  },
-                  "expired": {
-                    "type": "boolean"
-                  },
-                  "identifier": {
-                    "type": "string"
-                  },
-                  "allowed_devices": {
-                    "type": "integer"
-                  },
-                  "devices": {
-                    "type": "object"
-                  },
-                  "app": {
-                    "type": "string"
-                  },
-                  "created_by": {
-                    "type": "string"
-                  },
-                  "updated_by": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "app_version": {
-              "type": "string"
-            },
-            "url": {
-              "type": "uid"
             }
+          },
+          "app_version": {
+            "type": "string"
+          },
+          "url": {
+            "type": "uid"
           }
-        },
-        "NewApp": {
-          "required": [
-            "app_id"
-          ],
-          "properties": {
-            "app_id": {
+        }
+      },
+      "NewApp": {
+        "required": ["app_id"],
+        "properties": {
+          "app_id": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "owner": {
+            "type": "string"
+          },
+          "licenses": {
+            "type": "array",
+            "items": {
               "type": "string"
-            },
-            "enabled": {
-              "type": "boolean",
-              "default": true
-            },
-            "owner": {
-              "type": "string"
-            },
-            "licenses": {
-              "type": "array",
-              "items": {
+            }
+          },
+          "app_version": {
+            "type": "string"
+          },
+          "url": {
+            "type": "uid"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "License": {
+        "required": ["id", "description", "expiration_date", "identifier"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "expiration_date": {
+            "type": "string"
+          },
+          "expired": {
+            "type": "boolean",
+            "default": false
+          },
+          "identifier": {
+            "type": "string"
+          },
+          "allowed_devices": {
+            "type": "integer"
+          },
+          "devices": {
+            "type": "object"
+          },
+          "app": {
+            "required": ["id", "app_id"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "app_id": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "licenses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "app_version": {
+                "type": "string"
+              },
+              "url": {
+                "type": "uid"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
                 "type": "string"
               }
-            },
-            "app_version": {
-              "type": "string"
-            },
-            "url": {
-              "type": "uid"
-            },
-            "created_by": {
-              "type": "string"
-            },
-            "updated_by": {
-              "type": "string"
             }
           }
-        },
-        "License": {
-          "required": [
-            "id",
-            "description",
-            "expiration_date",
-            "identifier"
-          ],
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
-            },
-            "expiration_date": {
-              "type": "string"
-            },
-            "expired": {
-              "type": "boolean",
-              "default": false
-            },
-            "identifier": {
-              "type": "string"
-            },
-            "allowed_devices": {
-              "type": "integer"
-            },
-            "devices": {
-              "type": "object"
-            },
-            "app": {
-              "required": [
-                "id",
-                "app_id"
-              ],
+        }
+      },
+      "NewLicense": {
+        "required": ["description", "expiration_date", "identifier"],
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "expiration_date": {
+            "type": "string"
+          },
+          "expired": {
+            "type": "boolean",
+            "default": false
+          },
+          "identifier": {
+            "type": "string"
+          },
+          "allowed_devices": {
+            "type": "integer"
+          },
+          "devices": {
+            "type": "object"
+          },
+          "app": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Users": {
+        "required": ["id", "username", "email"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string",
+            "minLength": 3
+          },
+          "email": {
+            "type": "string",
+            "minLength": 6
+          },
+          "provider": {
+            "type": "string"
+          },
+          "confirmed": {
+            "type": "boolean",
+            "default": false
+          },
+          "blocked": {
+            "type": "boolean",
+            "default": false
+          },
+          "role": {
+            "required": ["id", "name"],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "permissions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "apps": {
+            "type": "array",
+            "items": {
+              "required": ["id", "app_id"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1362,240 +1449,88 @@
               }
             }
           }
-        },
-        "NewLicense": {
-          "required": [
-            "description",
-            "expiration_date",
-            "identifier"
-          ],
-          "properties": {
-            "description": {
-              "type": "string"
-            },
-            "expiration_date": {
-              "type": "string"
-            },
-            "expired": {
-              "type": "boolean",
-              "default": false
-            },
-            "identifier": {
-              "type": "string"
-            },
-            "allowed_devices": {
-              "type": "integer"
-            },
-            "devices": {
-              "type": "object"
-            },
-            "app": {
-              "type": "string"
-            },
-            "created_by": {
-              "type": "string"
-            },
-            "updated_by": {
-              "type": "string"
-            }
-          }
-        },
-        "Users": {
-          "required": [
-            "id",
-            "username",
-            "email"
-          ],
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string",
-              "minLength": 3
-            },
-            "email": {
-              "type": "string",
-              "minLength": 6
-            },
-            "provider": {
-              "type": "string"
-            },
-            "confirmed": {
-              "type": "boolean",
-              "default": false
-            },
-            "blocked": {
-              "type": "boolean",
-              "default": false
-            },
-            "role": {
-              "required": [
-                "id",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "permissions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "users": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            },
-            "apps": {
-              "type": "array",
-              "items": {
-                "required": [
-                  "id",
-                  "app_id"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "app_id": {
-                    "type": "string"
-                  },
-                  "enabled": {
-                    "type": "boolean"
-                  },
-                  "owner": {
-                    "type": "string"
-                  },
-                  "licenses": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "app_version": {
-                    "type": "string"
-                  },
-                  "url": {
-                    "type": "uid"
-                  },
-                  "created_by": {
-                    "type": "string"
-                  },
-                  "updated_by": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "NewUsers": {
-          "required": [
-            "username",
-            "email"
-          ],
-          "properties": {
-            "username": {
-              "type": "string",
-              "minLength": 3
-            },
-            "email": {
-              "type": "string",
-              "minLength": 6
-            },
-            "provider": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string",
-              "format": "password",
-              "minLength": 6
-            },
-            "resetPasswordToken": {
-              "type": "string"
-            },
-            "confirmationToken": {
-              "type": "string"
-            },
-            "confirmed": {
-              "type": "boolean",
-              "default": false
-            },
-            "blocked": {
-              "type": "boolean",
-              "default": false
-            },
-            "role": {
-              "type": "string"
-            },
-            "apps": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "created_by": {
-              "type": "string"
-            },
-            "updated_by": {
+        }
+      },
+      "NewUsers": {
+        "required": ["username", "email"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "minLength": 3
+          },
+          "email": {
+            "type": "string",
+            "minLength": 6
+          },
+          "provider": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 6
+          },
+          "resetPasswordToken": {
+            "type": "string"
+          },
+          "confirmationToken": {
+            "type": "string"
+          },
+          "confirmed": {
+            "type": "boolean",
+            "default": false
+          },
+          "blocked": {
+            "type": "boolean",
+            "default": false
+          },
+          "role": {
+            "type": "string"
+          },
+          "apps": {
+            "type": "array",
+            "items": {
               "type": "string"
             }
-          }
-        },
-        "Error": {
-          "required": [
-            "code",
-            "message"
-          ],
-          "properties": {
-            "code": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "message": {
-              "type": "string"
-            }
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
-      "securitySchemes": {
-        "bearerAuth": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
+      "Error": {
+        "required": ["code", "message"],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
         }
       }
     },
-    "tags": [
-      {
-        "name": "App"
-      },
-      {
-        "name": "License"
-      },
-      {
-        "name": "User"
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
-    ]
-  }
+    }
+  },
+  "tags": [
+    {
+      "name": "App"
+    },
+    {
+      "name": "License"
+    },
+    {
+      "name": "User"
+    }
+  ]
+}

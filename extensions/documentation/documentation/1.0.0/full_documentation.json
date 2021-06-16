@@ -7,21 +7,20 @@
     "termsOfService": "https://github.com/ppmaluch/qba-license-manager#readme",
     "contact": {
       "name": "Ppmaluch",
-      "email": "ppmaluch@gmail.com"
+      "email": "ppmaluch@gmail.com",
+      "url": "mywebsite.io"
     },
     "license": {
       "name": "GPL 3.0",
       "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
     },
-    "x-generation-date": "06/15/2021 7:48:21 PM"
+    "x-generation-date": "06/16/2021 11:06:56 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
     "showGeneratedFiles": true,
     "generateDefaultResponse": true,
-    "pluginsForWhichToGenerateDoc": [
-      "users-permissions"
-    ]
+    "pluginsForWhichToGenerateDoc": []
   },
   "servers": [
     {
@@ -29,8 +28,12 @@
       "description": "Development server"
     },
     {
-      "url": "YOUR_STAGING_SERVER",
+      "url": "https://qba-license-manager.herokuapp.com",
       "description": "Heroku"
+    },
+    {
+      "url": "YOUR_PRODUCTION_SERVER",
+      "description": "Production server"
     }
   ],
   "externalDocs": {
@@ -237,7 +240,7 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new app, licenses object not required. url property is a slug automatically set by the backend, so no need to send",
+        "description": "Create a new record",
         "responses": {
           "200": {
             "description": "response",
@@ -300,7 +303,7 @@
     "/apps/{url}": {
       "get": {
         "deprecated": false,
-        "description": "Gets an app passing the url (slug of the app_id property)",
+        "description": "",
         "responses": {
           "200": {
             "description": "response",
@@ -351,7 +354,7 @@
           {
             "name": "url",
             "in": "path",
-            "description": "example: com-mycompany-myapp",
+            "description": "",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -362,7 +365,7 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Updates an app that belongs to the authenticated user",
+        "description": "Update a record",
         "responses": {
           "200": {
             "description": "response",
@@ -424,7 +427,7 @@
           {
             "name": "url",
             "in": "path",
-            "description": "example: com-mycompany-myapp",
+            "description": "",
             "deprecated": false,
             "required": true,
             "schema": {
@@ -435,14 +438,15 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Deletes an app that belongs to the authenticated user",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the URL supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "integer",
+                  "format": "int64"
                 }
               }
             }
@@ -499,7 +503,7 @@
     "/licenses": {
       "get": {
         "deprecated": false,
-        "description": "Gets all licenses that are registered to apps that belongs to the authenticated user",
+        "description": "",
         "responses": {
           "200": {
             "description": "response",
@@ -690,7 +694,7 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Creates a new license",
+        "description": "Create a new record",
         "responses": {
           "200": {
             "description": "response",
@@ -753,7 +757,7 @@
     "/licenses/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Gets a license only if it's registered to an app that belongs to the authenticated user",
+        "description": "",
         "responses": {
           "200": {
             "description": "response",
@@ -815,7 +819,7 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Updates a license only if it's registered to an app that belongs to the authenticated user",
+        "description": "Update a record",
         "responses": {
           "200": {
             "description": "response",
@@ -888,7 +892,7 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Deletes a license only if it's registered to an app that belongs to the authenticated user",
+        "description": "Delete a record",
         "responses": {
           "200": {
             "description": "deletes a single record based on the ID supplied",
@@ -948,193 +952,6 @@
             }
           }
         ]
-      }
-    },
-    "/auth/local": {
-      "post": {
-        "deprecated": false,
-        "description": "Login a user using the identifiers email and password",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "User"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/local/register": {
-      "post": {
-        "deprecated": false,
-        "description": "Register a new user with the default role",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Users"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "User"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUsers"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/me": {
-      "get": {
-        "deprecated": false,
-        "description": "Retrieve the logged in user information",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Users"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "User"
-        ],
-        "parameters": []
       }
     }
   },
@@ -1400,169 +1217,6 @@
           }
         }
       },
-      "Users": {
-        "required": [
-          "id",
-          "username",
-          "email"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string",
-            "minLength": 3
-          },
-          "email": {
-            "type": "string",
-            "minLength": 6
-          },
-          "provider": {
-            "type": "string"
-          },
-          "confirmed": {
-            "type": "boolean",
-            "default": false
-          },
-          "blocked": {
-            "type": "boolean",
-            "default": false
-          },
-          "role": {
-            "required": [
-              "id",
-              "name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              },
-              "permissions": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "apps": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "app_id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "app_id": {
-                  "type": "string"
-                },
-                "enabled": {
-                  "type": "boolean"
-                },
-                "owner": {
-                  "type": "string"
-                },
-                "licenses": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "app_version": {
-                  "type": "string"
-                },
-                "url": {
-                  "type": "uid"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "NewUsers": {
-        "required": [
-          "username",
-          "email"
-        ],
-        "properties": {
-          "username": {
-            "type": "string",
-            "minLength": 3
-          },
-          "email": {
-            "type": "string",
-            "minLength": 6
-          },
-          "provider": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string",
-            "format": "password",
-            "minLength": 6
-          },
-          "resetPasswordToken": {
-            "type": "string"
-          },
-          "confirmationToken": {
-            "type": "string"
-          },
-          "confirmed": {
-            "type": "boolean",
-            "default": false
-          },
-          "blocked": {
-            "type": "boolean",
-            "default": false
-          },
-          "role": {
-            "type": "string"
-          },
-          "apps": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
       "Error": {
         "required": [
           "code",
@@ -1593,9 +1247,6 @@
     },
     {
       "name": "License"
-    },
-    {
-      "name": "User"
     }
   ]
 }
