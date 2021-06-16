@@ -7,8 +7,7 @@
     "termsOfService": "https://github.com/ppmaluch/qba-license-manager#readme",
     "contact": {
       "name": "Ppmaluch",
-      "email": "ppmaluch@gmail.com",
-      "url": "mywebsite.io"
+      "email": "ppmaluch@gmail.com"
     },
     "license": {
       "name": "GPL 3.0",
@@ -1032,7 +1031,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "$ref": "#/components/schemas/Users"
                 }
               }
             }
@@ -1078,7 +1077,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
+                "$ref": "#/components/schemas/NewUsers"
               }
             }
           }
@@ -1095,7 +1094,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
+                  "$ref": "#/components/schemas/Users"
                 }
               }
             }
@@ -1401,7 +1400,7 @@
           }
         }
       },
-      "UsersPermissionsUser": {
+      "Users": {
         "required": [
           "id",
           "username",
@@ -1511,7 +1510,7 @@
           }
         }
       },
-      "NewUsersPermissionsUser": {
+      "NewUsers": {
         "required": [
           "username",
           "email"
